@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: ci
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    env:
+      renovate_cmd: |
+        #!/bin/sh
+        set -eux
+        renovate-config-validator --strict /default.json
+      renovate_cmd_path: ${{ github.workspace }}/check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: printf "%s" "${{ env.renovate_cmd }}" | tee "${{ env.renovate_cmd_path }}"
+      - run: chmod +x "${{ env.renovate_cmd_path }}"
+      - uses: renovatebot/github-action@v41.0.6
+        env:
+          LOG_LEVEL: debug
+        with:
+          docker-cmd-file: ${{ env.renovate_cmd_path }}
+          docker-volumes: ${{ github.workspace }}/default.json:/default.json
+          token: ${{ github.sha }}

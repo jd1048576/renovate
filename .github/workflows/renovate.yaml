@@ -16,7 +16,7 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
-      - uses: renovatebot/github-action@v43.0.11
+      - uses: renovatebot/github-action@v43.0.12
         env:
           RENOVATE_AUTODISCOVER: true
           RENOVATE_AUTODISCOVER_FILTER: /^jd1048576\/(dev-container|renovate)$/

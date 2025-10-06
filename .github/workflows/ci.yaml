@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v5
       - run: printf "%s" "${{ env.renovate_cmd }}" | tee "${{ env.renovate_cmd_path }}"
       - run: chmod +x "${{ env.renovate_cmd_path }}"
-      - uses: renovatebot/github-action@v43.0.14
+      - uses: renovatebot/github-action@v43.0.15
         env:
           LOG_LEVEL: debug
         with:

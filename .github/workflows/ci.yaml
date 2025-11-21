@@ -14,7 +14,7 @@ jobs:
       renovate_cmd_path: ${{ github.workspace }}/check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - run: printf "%s" "${{ env.renovate_cmd }}" | tee "${{ env.renovate_cmd_path }}"
       - run: chmod +x "${{ env.renovate_cmd_path }}"
       - uses: renovatebot/github-action@v44.0.3
